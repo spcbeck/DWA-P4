@@ -12,5 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layout.master')->nest("content", "layout.grid");
 });
+
+Route::post('/album/add', 'AlbumController@postAddAlbum');
+
+Route::get('/album/add', function () {
+    return view('layout.master')->nest("content", "album.add");
+});
+
