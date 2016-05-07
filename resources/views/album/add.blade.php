@@ -6,8 +6,8 @@
 <form method="POST" action="/album/add" >
 	{{ csrf_field() }}
 	<div class="form-group">
-		<label for="name">Album Title</label>
-		<input id="name" type="text" name="title" />
+		<label for="title">Album Title</label>
+		<input id="title" type="text" name="title" />
 	</div>
 
 	<div class="form-group">
@@ -17,7 +17,7 @@
 
 	<div class="form-group">
 		<label for="type">Type</label>
-		<select id="type">
+		<select id="type" name="type">
 			<option value="lp">LP</option>
 			<option value="ep">EP</option>
 			<option value="single">Single</option>
@@ -26,7 +26,7 @@
 
 	<div class="form-group">
 		<label for="format">Format</label>
-		<select id="format">
+		<select id="format" name="format">
 			<option value="vinyl">Vinyl</option>
 			<option value="cd">CD</option>
 		</select>
