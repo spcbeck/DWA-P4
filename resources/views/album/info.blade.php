@@ -3,8 +3,16 @@
 @section('content')
 	<div class="row">
 		<img src="http://placehold.it/260x260">
-		<h1>Album Name</h1>
-		<h2>Album Artist</h2>
+		<h1>
+			@if(!empty($name))
+				{{$name}}
+			@endif
+		</h1>
+		<h2>
+			@if(!empty($artist))
+				{{$artist}}
+			@endif
+		</h2>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
@@ -23,11 +31,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>
-						
-						</td>
-					</tr>
+					@foreach ($tracks as $track)
+					   <tr>
+							<td>
+							
+							</td>
+						</tr>
+					@endforeach
 				</tbody>
 			</table>
 		</div>

@@ -6,13 +6,13 @@
 <form method="POST" action="/album/add" >
 	{{ csrf_field() }}
 	<div class="form-group">
-		<label for="name">Album Name</label>
-		<input id="name" type="text" />
+		<label for="name">Album Title</label>
+		<input id="name" type="text" name="title" />
 	</div>
 
 	<div class="form-group">
 		<label for="artist">Artist</label>
-		<input id="artist" type="text" />
+		<input id="artist" type="text" name="artist" />
 	</div>
 
 	<div class="form-group">

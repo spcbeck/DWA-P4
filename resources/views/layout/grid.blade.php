@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('content')
-<h1>Title Here</h1>
+<h1>{{$title}}</h1>
 <a class="btn btn-primary pull-right" href="/album/add">Add Album</a>
 
 <!--<table class="table">
@@ -36,11 +36,11 @@
 </table>-->
 
 <ul class="list-group">
-	<li class="list-group-item">
-		@if(!empty($name))
-			{{ $name }}
-		@endif
-	</li>
+	@foreach ($albums as $album)
+		<li class="list-group-item">
+		   <a href="/album/{{id}}">{{$album}}</a>
+	   </li>
+	@endforeach
 </ul>
 
 @stop
