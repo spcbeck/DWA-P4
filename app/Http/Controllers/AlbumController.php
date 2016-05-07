@@ -19,6 +19,7 @@ class AlbumController extends Controller
 
         $artist = \App\Artist::where('name', "=", $artist_input)->first();
 
+        //If the artist typed in doesn't match any current Artists, add the new artist to the artist database.
         if(empty($artist)){ 
             $new_artist = new \App\Artist();
 
@@ -47,10 +48,23 @@ class AlbumController extends Controller
     	return view("layout.master")->nest('content', 'album.info', ['title' => $request->title, 'artist' => $request->artist, 'tracks' => $tracks]);
     }
 
+    public function getAlbum($id = null) {
+        $album = \App\Album::with("artist")->find($id);
+
+        if(is_null($album)) {
+            \Session::flash('message','Book not found');
+            return redirect('/albums');
+        }
+
+        $tracks = [];
+        return view("layout.master")->nest("content", 'album.info', ['title' => $album->title, 'artist' => $album->artist->name, 'tracks' => $tracks]);
+    }
+
+
     public function getAlbums() {
-    	$albums = ["Lonesome Crowded West", "Paranoid Android", "Weezer"];
+    	$albums = \App\Album::with("artist")->get();
     	$title = "Albums";
 
-    	return view("layout.master")->nest('content', 'layout.grid', ["albums" => $albums, "title" => $title, "ids" => $ids]);
+    	return view("layout.master")->nest('content', 'layout.grid', ["albums" => $albums, "title" => $title]);
     }
 }

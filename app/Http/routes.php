@@ -19,6 +19,7 @@ Route::post('/album/add', 'AlbumController@postAddAlbum');
 
 
 Route::get('/albums', 'AlbumController@getAlbums');
+Route::get('/albums/{id?}', 'AlbumController@getAlbum');
 
 Route::get('/album/add', function () {
     return view('layout.master')->nest("content", "album.add");

@@ -36,9 +36,9 @@
 					    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					    	<div class="h1 site-title">Museic</div>
 					    	<ul class="nav navbar-nav">
-					        	<li><a href="/">Albums</a></li>
-					        	<li><a href="/">Tracks</a></li>
-					        	<li><a href="/">Artists</a></li>
+					        	<li><a href="/albums">Albums</a></li>
+					        	<li><a href="/tracks">Tracks</a></li>
+					        	<li><a href="/artists">Artists</a></li>
 					    	</ul>
 					    </div>
 				    </div>

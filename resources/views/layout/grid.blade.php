@@ -38,7 +38,9 @@
 <ul class="list-group">
 	@foreach ($albums as $album)
 		<li class="list-group-item">
-		   <a href="/album/{{id}}">{{$album}}</a>
+		   <a href="/albums/{{$album->id}}">
+		   		<h2>{{$album->title}} <small>{{ $album->artist->name}}</small></h2>
+		   </a>
 	   </li>
 	@endforeach
 </ul>
