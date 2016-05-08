@@ -35,6 +35,7 @@
 				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				    	<div class="h1 site-title">Museic</div>
 				    	@if(Auth::check())
+				    	<a class="btn btn-primary btn-block" href="/album/add">Add Album</a>
 				    	<ul class="nav navbar-nav">
 				        	<li class="active"><a href="/albums">Albums</a></li>
 				        	<li><a href="/artists">Artists</a></li>

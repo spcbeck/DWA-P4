@@ -13,8 +13,6 @@ class AlbumController extends Controller
      * Responds to requests to POST /album/add
      */
     public function postAddAlbum(Request $request) {
-    	//$request->input("name");
-    	//$request->input("artist");
 
         $artist_input = $request->artist;
 
@@ -43,8 +41,13 @@ class AlbumController extends Controller
             $album->artist_id = $artist->id;
         }
 
-        $album->save();
+        //get the current user and save the album to the current user's album list
+        $id = \Auth::user()->id;
+        $currentuser = \App\User::find($id);
 
+        $currentuser->albums()->save($album);
+
+        //TODO: pull in tracks from spotify
     	$tracks = [];
     	return view("layout.master")->nest('content', 'album.info', ['title' => $request->title, 'artist' => $request->artist, 'tracks' => $tracks]);
     }
@@ -80,9 +83,12 @@ class AlbumController extends Controller
 
 
     public function getAlbums() {
-    	$albums = \App\Album::with("artist")->get();
+        $id = \Auth::user()->id;
+        $currentuser = \App\User::find($id);
+    	$user = \App\User::where("id","=", $currentuser->id)->with("albums")->first();
     	$title = "Albums";
 
-    	return view("layout.master")->nest('content', 'layout.grid', ["data" => $albums, "title" => $title, "type" => "album"]);
+
+    	return view("layout.master")->nest('content', 'layout.grid', ["data" => $user->albums, "title" => $title, "type" => "album"]);
     }
 }

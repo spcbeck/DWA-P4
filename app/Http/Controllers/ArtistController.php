@@ -17,9 +17,14 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        $artists = \App\Artist::get();
+        $id = \Auth::user()->id;
+        $currentuser = \App\User::find($id);
+        $user = \App\User::where("id","=", $currentuser->id)->with("albums", 'albums.artist')->first();
         $title = "Artists";
 
+        $albums = $user->albums;
+
+        $artists = $albums->unique("artist");
 
 
         return view("layout.master")->nest('content', 'layout.grid', ["data" => $artists, "title" => $title, "type" => "artist"]);

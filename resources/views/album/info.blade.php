@@ -2,7 +2,9 @@
 
 @section('content')
 	<div class="row">
+		@if(!empty($cover_url))
 		<img src="{{$cover_url}}">
+		@endif
 		<h1>
 			@if(!empty($album->name))
 				{{$album->name}}

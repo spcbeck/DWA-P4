@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Session;
+
 class User extends Authenticatable
 {
     /**
@@ -26,5 +28,10 @@ class User extends Authenticatable
 
     public function albums() {
         return $this->belongsToMany('\App\Album')->withTimestamps();
+    }
+
+    public function artists() {
+      $artist_ids = \DB::table('album_user')->where('user_id', $this->id)->lists('album_id');
+      return \App\Artist::whereIn('id', $artist_ids)->get();
     }
 }
