@@ -35,14 +35,24 @@
 	</tbody>
 </table>-->
 
+@if(!empty($data))
 <ul class="list-group">
-	@foreach ($albums as $album)
+	@foreach ($data as $item)
 		<li class="list-group-item">
-		   <a href="/albums/{{$album->id}}">
-		   		<h2>{{$album->title}} <small>{{ $album->artist->name}}</small></h2>
-		   </a>
+			@if ($type == "artist")
+			   <a href="/artists/{{$item->id}}">
+			   		<h2>{{$item->name}} </h2>
+			   </a>
+			@endif
+
+			@if ($type == "album")
+			   <a href="/albums/{{$item->id}}">
+			   		<h2>{{$item->title}} <small>{{ $item->artist->name}}</small></h2>
+			   </a>
+			@endif
 	   </li>
 	@endforeach
 </ul>
+@endif
 
 @stop

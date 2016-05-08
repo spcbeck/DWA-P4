@@ -2,10 +2,10 @@
 
 @section('content')
 	<div class="row">
-		<img src="http://placehold.it/260x260">
+		<img src="{{$cover_url}}">
 		<h1>
-			@if(!empty($name))
-				{{$name}}
+			@if(!empty($album->name))
+				{{$album->name}}
 			@endif
 		</h1>
 		<h2>
@@ -33,8 +33,14 @@
 				<tbody>
 					@foreach ($tracks as $track)
 					   <tr>
+					   		<td>
+					   			{{$track->track_number}}
+					   		</td>
 							<td>
-							
+								{{$track->name}}
+							</td>
+							<td>
+								{{$track->duration_ms}}
 							</td>
 						</tr>
 					@endforeach

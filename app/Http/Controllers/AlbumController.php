@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use SpotifyWebAPI\SpotifyWebAPI;
 
 use App\Http\Requests;
 
@@ -50,14 +51,31 @@ class AlbumController extends Controller
 
     public function getAlbum($id = null) {
         $album = \App\Album::with("artist")->find($id);
+        $api = new SpotifyWebAPI();
+
+
+        $results = $api->search($album->title, 'album');
+
+
+        $results = json_decode(json_encode($results), true);
+
+        $spotify_id = $results["albums"]["items"][0]["id"];
+
+        $spotify_album = $api->getAlbum($spotify_id);
+
+        //create track list from spotify
+        foreach( $spotify_album->tracks->items as $item) {
+            $tracks[] = $item;
+        }
+
+        //get album cover from spotify
+        $cover_url = $spotify_album->images[1]->url;
 
         if(is_null($album)) {
             \Session::flash('message','Book not found');
             return redirect('/albums');
         }
-
-        $tracks = [];
-        return view("layout.master")->nest("content", 'album.info', ['title' => $album->title, 'artist' => $album->artist->name, 'tracks' => $tracks]);
+        return view("layout.master")->nest("content", 'album.info', ['artist' => $album->artist->name, 'tracks' => $tracks, 'cover_url' => $cover_url, "album" => $spotify_album]);
     }
 
 
@@ -65,6 +83,6 @@ class AlbumController extends Controller
     	$albums = \App\Album::with("artist")->get();
     	$title = "Albums";
 
-    	return view("layout.master")->nest('content', 'layout.grid', ["albums" => $albums, "title" => $title]);
+    	return view("layout.master")->nest('content', 'layout.grid', ["data" => $albums, "title" => $title, "type" => "album"]);
     }
 }

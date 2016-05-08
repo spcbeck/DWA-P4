@@ -4,6 +4,8 @@
 @media (min-width: 768px) {
   .sidebar-nav .navbar {
   	height: 100vh;
+    position: fixed !important;
+    width: calc(16.66666667% - 30px);
   }
 
   .sidebar-nav .navbar .navbar-collapse {

@@ -3,27 +3,29 @@
   /* line 5, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar {
     height: 100vh;
+    position: fixed !important;
+    width: calc(16.66666667% - 30px);
   }
 
-  /* line 9, ../../resources/assets/sass/app.scss */
+  /* line 11, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
   }
 
-  /* line 13, ../../resources/assets/sass/app.scss */
+  /* line 15, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar ul {
     float: none;
     display: block;
   }
 
-  /* line 17, ../../resources/assets/sass/app.scss */
+  /* line 19, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar li {
     float: none;
     display: block;
   }
 
-  /* line 21, ../../resources/assets/sass/app.scss */
+  /* line 23, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar li a {
     padding-top: 12px;
     padding-bottom: 12px;

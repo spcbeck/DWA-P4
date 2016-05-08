@@ -31,16 +31,21 @@
 		<div class="row">
 			<div class="col-md-2 sidebar-nav">
 				<nav class="navbar navbar-default">
-					<div class="container">
-						<!-- Collect the nav links, forms, and other content for toggling -->
-					    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					    	<div class="h1 site-title">Museic</div>
-					    	<ul class="nav navbar-nav">
-					        	<li><a href="/albums">Albums</a></li>
-					        	<li><a href="/tracks">Tracks</a></li>
-					        	<li><a href="/artists">Artists</a></li>
-					    	</ul>
-					    </div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				    	<div class="h1 site-title">Museic</div>
+				    	@if(Auth::check())
+				    	<ul class="nav navbar-nav">
+				        	<li class="active"><a href="/albums">Albums</a></li>
+				        	<li><a href="/artists">Artists</a></li>
+				        	<li><a href="/logout">Logout</a></li>
+				    	</ul>
+				    	@else
+				    	<ul class="nav navbar-nav">
+				    		<li><a href="/login">Login</a></li>
+				    		<li><a href="/register">Register</a></li>
+				    	</ul>
+				    	@endif
 				    </div>
 				</nav>
 			</div>

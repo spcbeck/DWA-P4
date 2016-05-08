@@ -12,50 +12,51 @@
 */
 
 Route::get('/', function () {
-    return view('layout.master')->nest("content", "layout.grid");
+    return redirect("/albums");
 });
 
-Route::post('/album/add', 'AlbumController@postAddAlbum');
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/album/add', 'AlbumController@postAddAlbum');
 
+	Route::get('/albums', 'AlbumController@getAlbums');
+	Route::get('/albums/{id?}', 'AlbumController@getAlbum');
 
-Route::get('/albums', 'AlbumController@getAlbums');
-Route::get('/albums/{id?}', 'AlbumController@getAlbum');
+	Route::get('/artists', 'ArtistController@index');
+	Route::get("/artists/{id?}", 'ArtistController@show');
 
-Route::get('/album/add', function () {
-    return view('layout.master')->nest("content", "album.add");
+	Route::get('/album/add', function () {
+	    return view('layout.master')->nest("content", "album.add");
+	});
 });
 
-Route::get('/debug', function() {
 
-    echo '<pre>';
+# Show login form
+Route::get('/login', 'Auth\AuthController@getLogin');
 
-    echo '<h1>Environment</h1>';
-    echo App::environment().'</h1>';
+# Process login form
+Route::post('/login', 'Auth\AuthController@postLogin');
 
-    echo '<h1>Debugging?</h1>';
-    if(config('app.debug')) echo "Yes"; else echo "No";
+# Process logout
+Route::get('/logout', 'Auth\AuthController@logout');
 
-    echo '<h1>Database Config</h1>';
-    /*
-    The following line will output your MySQL credentials.
-    Uncomment it only if you're having a hard time connecting to the database and you
-    need to confirm your credentials.
-    When you're done debugging, comment it back out so you don't accidentally leave it
-    running on your live server, making your credentials public.
-    */
-    //print_r(config('database.connections.mysql'));
+# Show registration form
+Route::get('/register', 'Auth\AuthController@getRegister');
 
-    echo '<h1>Test Database Connection</h1>';
-    try {
-        $results = DB::select('SHOW DATABASES;');
-        echo '<strong style="background-color:green; padding:5px;">Connection confirmed</strong>';
-        echo "<br><br>Your Databases:<br><br>";
-        print_r($results);
-    }
-    catch (Exception $e) {
-        echo '<strong style="background-color:crimson; padding:5px;">Caught exception: ', $e->getMessage(), "</strong>\n";
+# Process registration form
+Route::post('/register', 'Auth\AuthController@postRegister');
+
+Route::get('/show-login-status', function() {
+
+    # You may access the authenticated user via the Auth facade
+    $user = Auth::user();
+
+    if($user) {
+        echo 'You are logged in.';
+        dump($user->toArray());
+    } else {
+        echo 'You are not logged in.';
     }
 
-    echo '</pre>';
+    return;
 
 });
