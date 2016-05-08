@@ -12,6 +12,11 @@ class Album extends Model
         return $this->belongsTo('\App\Artist');
     }
 
+    public function users()
+	{
+	    return $this->belongsToMany('\App\User')->withTimestamps();
+	}
+
     public static function getAllAlbumsWithArtists() {
         return \App\Album::with('artist')->orderBy('id','desc')->get();
     }
