@@ -37,8 +37,8 @@
 				    	@if(Auth::check())
 				    	<a class="btn btn-primary btn-block" href="/album/add">Add Album</a>
 				    	<ul class="nav navbar-nav">
-				        	<li class="active"><a href="/albums">Albums</a></li>
-				        	<li><a href="/artists">Artists</a></li>
+				        	<li class="{{ $type == 'album' ? 'active' : '' }}"><a href="/albums">Albums</a></li>
+				        	<li class="{{ $type == 'artist' ? 'active' : '' }}"><a href="/artists">Artists</a></li>
 				        	<li><a href="/logout">Logout</a></li>
 				    	</ul>
 				    	@else

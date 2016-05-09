@@ -27,7 +27,7 @@ class ArtistController extends Controller
         $artists = $albums->unique("artist");
 
 
-        return view("layout.master")->nest('content', 'layout.grid', ["data" => $artists, "title" => $title, "type" => "artist"]);
+        return view("layout.master", ["type" => "artist"])->nest('content', 'layout.grid', ["data" => $artists, "title" => $title, "type" => "artist"]);
     }
 
 

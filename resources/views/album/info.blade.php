@@ -1,18 +1,18 @@
 @extends('layout.master')
 
 @section('content')
-	<div class="row">
+	<div class="row album-info">
 		@if(!empty($cover_url))
-		<img src="{{$cover_url}}">
+		<img class="pull-left" src="{{$cover_url}}">
 		@endif
 		<h1>
-			@if(!empty($album->name))
-				{{$album->name}}
+			@if(!empty($album->title))
+				{{$album->title}}
 			@endif
 		</h1>
 		<h2>
-			@if(!empty($artist))
-				{{$artist}}
+			@if(!empty($album->artist->name))
+				{{$album->artist->name}}
 			@endif
 		</h2>
 	</div>

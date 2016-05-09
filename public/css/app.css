@@ -1,31 +1,40 @@
+/* line 3, ../../resources/assets/sass/app.scss */
+.album-info img {
+  margin: 20px 20px 20px 0;
+}
+/* line 6, ../../resources/assets/sass/app.scss */
+.album-info h1, .album-info h2 {
+  margin-left: 20px;
+}
+
 /* make sidebar nav vertical */
 @media (min-width: 768px) {
-  /* line 5, ../../resources/assets/sass/app.scss */
+  /* line 14, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar {
     height: 100vh;
     position: fixed !important;
     width: calc(16.66666667% - 30px);
   }
 
-  /* line 11, ../../resources/assets/sass/app.scss */
+  /* line 20, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
   }
 
-  /* line 15, ../../resources/assets/sass/app.scss */
+  /* line 24, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar ul {
     float: none;
     display: block;
   }
 
-  /* line 19, ../../resources/assets/sass/app.scss */
+  /* line 28, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar li {
     float: none;
     display: block;
   }
 
-  /* line 23, ../../resources/assets/sass/app.scss */
+  /* line 32, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar li a {
     padding-top: 12px;
     padding-bottom: 12px;

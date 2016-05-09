@@ -25,7 +25,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get("/artists/{id?}", 'ArtistController@show');
 
 	Route::get('/album/add', function () {
-	    return view('layout.master')->nest("content", "album.add");
+	    return view('layout.master', ["type" => "album"])->nest("content", "album.add", ["type" => "album"]);
 	});
 });
 
