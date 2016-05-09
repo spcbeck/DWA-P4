@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Discogs\ClientFactory;
+use SpotifyWebAPI\SpotifyWebAPI;
 
 use App\Http\Requests;
 
@@ -22,9 +23,8 @@ class ArtistController extends Controller
         $user = \App\User::where("id","=", $currentuser->id)->with("albums", 'albums.artist')->first();
         $title = "Artists";
 
-        $albums = $user->albums;
+        $artists = $currentuser->artists();
 
-        $artists = $albums->unique("artist");
 
 
         return view("layout.master", ["type" => "artist"])->nest('content', 'layout.grid', ["data" => $artists, "title" => $title, "type" => "artist"]);
@@ -61,9 +61,25 @@ class ArtistController extends Controller
      */
     public function show($id)
     {
-        $artist = \App\Album::find($id);
+        $artist = \App\Artist::get()->find($id);
+
+        $api = new SpotifyWebAPI();
+        $results = $api->search($artist->name, 'artist');
+        $results = json_decode(json_encode($results), true);
+
+        $spotify_id = $results["artists"]["items"][0]["id"];
+
+        $albums_container = $api->getArtistAlbums($spotify_id);
 
 
+        //create track list from spotify
+        foreach( $albums_container->items as $item) {
+            $albums[] = $item->name;
+        }
+
+        return $artist->picture;
+
+        return view("layout.master", ["type" => "album"])->nest("content", 'album.info', ['data' => $artist, 'tracks' => $albums, 'cover_url' => $artist->picture, "type" => "artist"]);
     }
 
     /**

@@ -3,16 +3,16 @@
 @section('content')
 	<div class="row album-info">
 		@if(!empty($cover_url))
-		<img class="pull-left" src="{{$cover_url}}">
+			<img class="pull-left" src="{{$cover_url}}">
 		@endif
 		<h1>
-			@if(!empty($album->title))
-				{{$album->title}}
+			@if(!empty($data->title or $data->name))
+				{{$data->title or $data->name}}
 			@endif
 		</h1>
 		<h2>
-			@if(!empty($album->artist->name))
-				{{$album->artist->name}}
+			@if(!empty($data->artist->name))
+				{{$data->artist->name}}
 			@endif
 		</h2>
 	</div>
@@ -21,6 +21,7 @@
 			<table class="table">
 				<thead>
 					<tr>
+					@if($type == "album")
 						<th>
 							#
 						</th>
@@ -30,9 +31,16 @@
 						<th>
 							Length
 						</th>
+						@endif
+						@if($type == "artist")
+						<th>
+							Albums
+						</th>
+						@endif
 					</tr>
 				</thead>
 				<tbody>
+					@if($type == "album")
 					@foreach ($tracks as $track)
 					   <tr>
 					   		<td>
@@ -46,6 +54,16 @@
 							</td>
 						</tr>
 					@endforeach
+					@endif
+					@if($type == "artist")
+					@foreach ($tracks as $track)
+					   <tr>
+					   		<td>
+					   			{{$track}}
+					   		</td>
+						</tr>
+					@endforeach
+					@endif
 				</tbody>
 			</table>
 		</div>

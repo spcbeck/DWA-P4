@@ -24,10 +24,14 @@ class AlbumController extends Controller
         if(empty($artist)){ 
             $new_artist = new \App\Artist();
 
+            $api = new SpotifyWebAPI();
+            $results_raw = $api->search($artist_input, 'artist');
+            $results = json_decode(json_encode($results_raw), true);
+            $picture = $results["artists"]["items"][0]["images"][0]["url"];
 
             $new_artist->name = $artist_input;
             $new_artist->biography = "";
-            $new_artist->picture = "";
+            $new_artist->picture = $picture;
             $new_artist->save();
         }
 
@@ -89,7 +93,7 @@ class AlbumController extends Controller
         }
 
 
-        return view("layout.master", ["type" => "album"])->nest("content", 'album.info', ['artist' => $album->artist->name, 'tracks' => $tracks, 'cover_url' => $album->cover, "album" => $album, "type" => "album", "tracks" => $tracks]);
+        return view("layout.master", ["type" => "album"])->nest("content", 'album.info', ['artist' => $album->artist->name, 'tracks' => $tracks, 'cover_url' => $album->cover, "data" => $album, "type" => "album", "tracks" => $tracks]);
     }
 
 

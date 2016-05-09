@@ -2,11 +2,25 @@
 .album-info {
   img {
     margin: 20px 20px 20px 0;
+    max-width: 300px;
   }
   h1, h2 {
     margin-left: 20px;
   }
+}
 
+.item-list {
+  text-align: center;
+  img {
+    height: 200px;
+    display: inline-block;
+  }
+
+  .item {
+    background-color: #ecf0f1;
+    margin-bottom: 30px;
+    padding: 20px;
+  }
 }
 
 /* make sidebar nav vertical */ 
