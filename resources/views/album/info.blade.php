@@ -15,7 +15,20 @@
 				{{$data->artist->name}}
 			@endif
 		</h2>
-	</div>
+		@if($type == "artist")
+		<div class="related-artists">
+		<h3>Related Artists</h3>
+			<ul class="list-group">
+				@foreach($related_artists as $artist)
+				<li class="list-group-item">
+					{{ $artist->name }}
+				</li>
+				@endforeach
+			</ul>
+		</h3>
+		</div>
+		@endif
+	</div>	
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">

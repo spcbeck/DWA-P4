@@ -34,4 +34,6 @@ class User extends Authenticatable
       $artist_ids = \DB::table('album_user')->where('user_id', $this->id)->lists('album_id');
       return \App\Artist::whereIn('id', $artist_ids)->get();
     }
+
+    
 }

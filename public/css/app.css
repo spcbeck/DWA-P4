@@ -22,36 +22,49 @@
   background-color: #ecf0f1;
   margin-bottom: 30px;
   padding: 20px;
+  height: 380px;
+}
+
+/* line 27, ../../resources/assets/sass/app.scss */
+.related-artists {
+  width: calc(100% - 320px);
+  float: right;
+}
+/* line 31, ../../resources/assets/sass/app.scss */
+.related-artists .list-group {
+  height: 206px;
+  overflow-y: scroll;
+  margin-right: 30px;
 }
 
 /* make sidebar nav vertical */
 @media (min-width: 768px) {
-  /* line 28, ../../resources/assets/sass/app.scss */
+  /* line 40, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar {
     height: 100vh;
     position: fixed !important;
     width: calc(16.66666667% - 30px);
   }
 
-  /* line 34, ../../resources/assets/sass/app.scss */
+  /* line 46, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
   }
 
-  /* line 38, ../../resources/assets/sass/app.scss */
+  /* line 50, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar ul {
     float: none;
     display: block;
   }
 
-  /* line 42, ../../resources/assets/sass/app.scss */
+  /* line 54, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar li {
     float: none;
     display: block;
   }
 
-  /* line 46, ../../resources/assets/sass/app.scss */
+  /* line 58, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar li a {
     padding-top: 12px;
     padding-bottom: 12px;

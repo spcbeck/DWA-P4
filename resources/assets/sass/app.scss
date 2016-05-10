@@ -20,6 +20,18 @@
     background-color: #ecf0f1;
     margin-bottom: 30px;
     padding: 20px;
+    height: 380px;
+  }
+}
+
+.related-artists {
+  width: calc(100% - 320px);
+  float: right;
+
+  .list-group {
+        height: 206px;
+    overflow-y: scroll;
+    margin-right: 30px;
   }
 }
 

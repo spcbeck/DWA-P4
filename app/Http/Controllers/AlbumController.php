@@ -103,6 +103,14 @@ class AlbumController extends Controller
     	$user = \App\User::where("id","=", $currentuser->id)->with("albums")->first();
     	$title = "Albums";
 
-    	return view("layout.master", ["type" => "album"])->nest('content', 'layout.grid', ["data" => $user->albums, "title" => $title, "type" => "album"]);
+        $albums = $user->albums->sortBy('title');
+
+    	return view("layout.master", ["type" => "album"])->nest('content', 'layout.grid', ["data" => $albums, "title" => $title, "type" => "album"]);
+    }
+
+    public function deleteAlbum() {
+        $id = \Auth::user()->id;
+        $currentuser = \App\User::find($id);
+        //$
     }
 }

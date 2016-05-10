@@ -70,6 +70,7 @@ class ArtistController extends Controller
         $spotify_id = $results["artists"]["items"][0]["id"];
 
         $albums_container = $api->getArtistAlbums($spotify_id);
+        $related_artists = $api->getArtistRelatedArtists($spotify_id);
 
 
         //create track list from spotify
@@ -77,9 +78,7 @@ class ArtistController extends Controller
             $albums[] = $item->name;
         }
 
-        return $artist->picture;
-
-        return view("layout.master", ["type" => "album"])->nest("content", 'album.info', ['data' => $artist, 'tracks' => $albums, 'cover_url' => $artist->picture, "type" => "artist"]);
+        return view("layout.master", ["type" => "album"])->nest("content", 'album.info', ['data' => $artist, 'tracks' => $albums, 'cover_url' => $artist->picture, "type" => "artist", "related_artists" => $related_artists->artists]);
     }
 
     /**
