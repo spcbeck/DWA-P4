@@ -9,28 +9,79 @@
 }
 
 /* line 12, ../../resources/assets/sass/app.scss */
+.site-title {
+  color: #8e44ad;
+  text-align: center;
+  font-family: "fira-sans-2", serif;
+}
+
+/* line 18, ../../resources/assets/sass/app.scss */
+h1, h2, h3, h4 {
+  font-family: "fira-sans-2", serif;
+}
+
+/* line 22, ../../resources/assets/sass/app.scss */
 .item-list {
   text-align: center;
+  margin-right: 0;
 }
-/* line 14, ../../resources/assets/sass/app.scss */
-.item-list img {
-  height: 200px;
-  display: inline-block;
-}
-/* line 19, ../../resources/assets/sass/app.scss */
+/* line 26, ../../resources/assets/sass/app.scss */
 .item-list .item {
   background-color: #ecf0f1;
   margin-bottom: 30px;
-  padding: 20px;
+  padding: 0 20px 20px 20px;
   height: 380px;
+  position: relative;
+}
+/* line 33, ../../resources/assets/sass/app.scss */
+.item-list .item.item-album {
+  height: auto;
+}
+/* line 36, ../../resources/assets/sass/app.scss */
+.item-list .item.item-album h2, .item-list .item.item-album h3 {
+  font-weight: 400;
+}
+/* line 42, ../../resources/assets/sass/app.scss */
+.item-list img {
+  width: calc(100% + 40px);
+  margin-left: -20px;
+}
+/* line 47, ../../resources/assets/sass/app.scss */
+.item-list .artist {
+  background-size: cover !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+/* line 55, ../../resources/assets/sass/app.scss */
+.item-list .artist h2 {
+  color: #2980b9;
+  font-weight: 800;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+/* line 63, ../../resources/assets/sass/app.scss */
+.item-list .artist:hover h2 {
+  color: #e74c3c;
+}
+/* line 67, ../../resources/assets/sass/app.scss */
+.item-list .artist .text-bg {
+  height: 100%;
+  background: -moz-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.53) 100%);
+  background: -webkit-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.53) 100%);
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.53) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#87000000',GradientType=0 );
 }
 
-/* line 27, ../../resources/assets/sass/app.scss */
+/* line 77, ../../resources/assets/sass/app.scss */
 .related-artists {
   width: calc(100% - 320px);
   float: right;
 }
-/* line 31, ../../resources/assets/sass/app.scss */
+/* line 81, ../../resources/assets/sass/app.scss */
 .related-artists .list-group {
   height: 206px;
   overflow-y: scroll;
@@ -39,32 +90,32 @@
 
 /* make sidebar nav vertical */
 @media (min-width: 768px) {
-  /* line 40, ../../resources/assets/sass/app.scss */
+  /* line 90, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar {
     height: 100vh;
     position: fixed !important;
     width: calc(16.66666667% - 30px);
   }
 
-  /* line 46, ../../resources/assets/sass/app.scss */
+  /* line 96, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
   }
 
-  /* line 50, ../../resources/assets/sass/app.scss */
+  /* line 100, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar ul {
     float: none;
     display: block;
   }
 
-  /* line 54, ../../resources/assets/sass/app.scss */
+  /* line 104, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar li {
     float: none;
     display: block;
   }
 
-  /* line 58, ../../resources/assets/sass/app.scss */
+  /* line 108, ../../resources/assets/sass/app.scss */
   .sidebar-nav .navbar li a {
     padding-top: 12px;
     padding-bottom: 12px;

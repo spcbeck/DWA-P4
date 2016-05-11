@@ -3,36 +3,38 @@
 @section('content')
 <h1>Add Album</h1>
 
-<form method="POST" action="/album/add" >
+<div class="row">
+<form method="POST" action="/album/add" class="add-form col-md-4" >
 	{{ csrf_field() }}
 	<div class="form-group">
 		<label for="title">Album Title</label>
-		<input id="title" type="text" name="title" />
+		<input id="title" class="form-control" type="text" name="title"/>
 	</div>
 
 	<div class="form-group">
 		<label for="artist">Artist</label>
-		<input id="artist" type="text" name="artist" />
+		<input id="artist" class="form-control" type="text" name="artist"/>
 	</div>
 
 	<div class="form-group">
 		<label for="type">Type</label>
-		<select id="type" name="type">
-			<option value="lp">LP</option>
-			<option value="ep">EP</option>
-			<option value="single">Single</option>
+		<select id="type" class="form-control" name="type">
+			<option value="LP">LP</option>
+			<option value="EP" >EP</option>
+			<option value="Single">Single</option>
 		</select>
 	</div>
 
 	<div class="form-group">
 		<label for="format">Format</label>
-		<select id="format" name="format">
-			<option value="vinyl">Vinyl</option>
-			<option value="cd">CD</option>
+		<select id="format" class="form-control" name="format">
+			<option value="Vinyl">Vinyl</option>
+			<option value="CD">CD</option>
 		</select>
 	</div>
 
-	<button type="submit" class="btn btn-primary">Add Album</button>
+	<button type="submit" class="btn btn-primary pull-right">Add Album</button>
 </form>
+</div>
 
 @stop

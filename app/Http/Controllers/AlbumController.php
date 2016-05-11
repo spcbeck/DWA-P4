@@ -87,9 +87,24 @@ class AlbumController extends Controller
         $spotify_id = $results["albums"]["items"][0]["id"];
         $spotify_album = $api->getAlbum($spotify_id);
 
+
+
         //create track list from spotify
         foreach( $spotify_album->tracks->items as $item) {
             $tracks[] = $item;
+
+            $time_in_ms = $item->duration_ms;
+
+            $uSec = $time_in_ms % 1000;
+            $time_in_ms = floor($time_in_ms / 1000);
+
+            $seconds = $time_in_ms % 60;
+            $time_in_ms = floor($time_in_ms / 60);
+
+            $minutes = $time_in_ms % 60;
+            $time_in_ms = floor($time_in_ms / 60); 
+
+            $item->duration_ms = $minutes.":".$seconds;
         }
 
 
@@ -108,9 +123,67 @@ class AlbumController extends Controller
     	return view("layout.master", ["type" => "album"])->nest('content', 'layout.grid', ["data" => $albums, "title" => $title, "type" => "album"]);
     }
 
-    public function deleteAlbum() {
+    public function deleteAlbum($id = null) {
         $id = \Auth::user()->id;
         $currentuser = \App\User::find($id);
-        //$
+        $albums = \DB::table("user_album")->where("user_id", "=", $currentuser)->get();
+
+        return $albums;
+    }
+
+    public function getEditAlbum($id = null) {
+        $album = \App\Album::with("artist")->find($id);
+        if(is_null($album)) {
+            \Session::flash('message','Album not found');
+            return redirect('/albums');
+        }
+
+        return view("layout.master", ["type" => "album"])->nest("content", 'album.edit', ["type" => "album", "album" => $album]);
+    }
+
+    public function postEditAlbum(Request $request) {
+
+        $this->validate($request,[
+            'title' => 'required|min:3',
+            'artist' => 'required|min:4',
+        ]);
+
+        $album = \App\Album::find($request->id);
+        $album->title = $request->title;
+        $album->artist->name = $request->artist;
+        $album->type = $request->type;
+        $album->format = $request->format;
+
+        $album->save();
+
+        \Session::flash('message','Your changes were saved.');
+        return redirect('/albums/'.$request->id);
+    }
+
+    public function getConfirmDelete($id) {
+        $album = \App\Album::find($id);
+
+        return view('album.delete', ["type" => $album])->with('album', $album);
+    }
+
+    public function getDoDelete($id) {
+        $user_id = \Auth::user()->id;
+        $currentuser = \App\User::find($user_id);
+
+        $album = \DB::table("albums")->find($id);
+
+        if(is_null($album)) {
+            \Session::flash('message','Album not found.');
+            return redirect('\albums');
+        }
+
+        return  \DB::table("album_user")->where("user_id", "=", $user_id)->where("album_id", "=", $id)->get();
+
+
+        \DB::table("album_user")->where("user_id", "=", $user_id)->where("album_id", "=", $id)->delete();
+
+        # Done
+        \Session::flash('message', $album->title.' was removed from your collection.');
+        return redirect('/albums');
     }
 }

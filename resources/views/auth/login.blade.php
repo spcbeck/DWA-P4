@@ -1,36 +1,58 @@
 @extends('layout.master')
 
 @section('content')
+    <div class="panel-body">
     <h1>Login</h1>
+        <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+            {!! csrf_field() !!}
 
-    @if(count($errors) > 0)
-        <ul class='errors'>
-            @foreach ($errors->all() as $error)
-                <li><span class='fa fa-exclamation-circle'></span> {{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                <label class="col-md-4 control-label">E-Mail Address</label>
 
-    <form method='POST' action='/login'>
+                <div class="col-md-6">
+                    <input type="email" class="form-control" name="email" value="{{ old('email') }}">
 
-        {!! csrf_field() !!}
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
 
-        <div class='form-group'>
-            <label for='email'>Email</label>
-            <input type='text' name='email' id='email' value='{{ old('email') }}'>
-        </div>
+            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                <label class="col-md-4 control-label">Password</label>
 
-        <div class='form-group'>
-            <label for='password'>Password</label>
-            <input type='password' name='password' id='password' value='{{ old('password') }}'>
-        </div>
+                <div class="col-md-6">
+                    <input type="password" class="form-control" name="password">
 
-        <div class='form-group'>
-            <input type='checkbox' name='remember' id='remember'>
-            <label for='remember' class='checkboxLabel'>Remember me</label>
-        </div>
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
 
-        <button type='submit' class='btn btn-primary'>Login</button>
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-4">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="remember"> Remember Me
+                        </label>
+                    </div>
+                </div>
+            </div>
 
-    </form>
-@stop
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-btn fa-sign-in"></i>Login
+                    </button>
+
+                    <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                </div>
+            </div>
+        </form>
+    </div>
+@endsection

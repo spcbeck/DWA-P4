@@ -9,24 +9,38 @@
 			@if(!empty($data->title or $data->name))
 				{{$data->title or $data->name}}
 			@endif
+			<small>
+				@if(!empty($data->type))
+					{{$data->type}}
+				@endif
+			</small>
 		</h1>
 		<h2>
 			@if(!empty($data->artist->name))
 				{{$data->artist->name}}
 			@endif
 		</h2>
-		@if($type == "artist")
-		<div class="related-artists">
-		<h3>Related Artists</h3>
-			<ul class="list-group">
-				@foreach($related_artists as $artist)
-				<li class="list-group-item">
-					{{ $artist->name }}
-				</li>
-				@endforeach
-			</ul>
+		<h3>
+		@if(!empty($data->format))
+				{{$data->format}}
+			@endif
 		</h3>
-		</div>
+		@if($type == "artist")
+			<div class="related-artists">
+			<h3>Related Artists</h3>
+				<ul class="list-group">
+					@foreach($related_artists as $artist)
+					<li class="list-group-item">
+						{{ $artist->name }}
+					</li>
+					@endforeach
+				</ul>
+			</h3>
+			</div>
+		@endif
+		@if($type == "album")
+			<a href="/albums/confirm-delete/{{$data->id}}" class="btn btn-danger">Delete</a>
+			<a href="/albums/edit/{{$data->id}}" class="btn btn-danger">Edit</a>
 		@endif
 	</div>	
 	<div class="row">

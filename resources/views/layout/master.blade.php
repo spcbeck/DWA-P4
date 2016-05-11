@@ -11,8 +11,11 @@
 
 	  	<link rel="SHORTCUT ICON" href="/favicon.ico" />
 
-	  	<link href="/css/app.css" rel="stylesheet" type="text/css">
+	  	<script src="https://use.typekit.net/btv4ydl.js"></script>
+		<script>try{Typekit.load({ async: true });}catch(e){}</script>
+
 	 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+	 	<link href="/css/app.css" rel="stylesheet" type="text/css">
 
 	 	<script src="https://use.typekit.net/tjj3ezf.js"></script>
 		<script>try{Typekit.load({ async: true });}catch(e){}</script>
@@ -32,7 +35,7 @@
 			<div class="col-md-2 sidebar-nav">
 				<nav class="navbar navbar-default">
 					<!-- Collect the nav links, forms, and other content for toggling -->
-				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				    <div class=" navbar-collapse" id="bs-example-navbar-collapse-1">
 				    	<div class="h1 site-title">Museic</div>
 				    	@if(Auth::check())
 				    	<a class="btn btn-primary btn-block" href="/album/add">Add Album</a>

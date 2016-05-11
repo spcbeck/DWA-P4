@@ -17,9 +17,13 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/album/add', 'AlbumController@postAddAlbum');
+    Route::post('/album/edit', 'AlbumController@postEditAlbum');
 
 	Route::get('/albums', 'AlbumController@getAlbums');
 	Route::get('/albums/{id?}', 'AlbumController@getAlbum');
+    Route::get('/albums/confirm-delete/{id}', 'AlbumController@getConfirmDelete');
+    Route::get('/albums/delete/{id}', 'AlbumController@getDoDelete');
+    Route::get('/albums/edit/{id}', "AlbumController@getEditAlbum");
 
 	Route::get('/artists', 'ArtistController@index');
 	Route::get("/artists/{id?}", 'ArtistController@show');
@@ -45,18 +49,6 @@ Route::get('/register', 'Auth\AuthController@getRegister');
 # Process registration form
 Route::post('/register', 'Auth\AuthController@postRegister');
 
-Route::get('/show-login-status', function() {
+Route::auth();
 
-    # You may access the authenticated user via the Auth facade
-    $user = Auth::user();
-
-    if($user) {
-        echo 'You are logged in.';
-        dump($user->toArray());
-    } else {
-        echo 'You are not logged in.';
-    }
-
-    return;
-
-});
+Route::get('/home', 'HomeController@index');

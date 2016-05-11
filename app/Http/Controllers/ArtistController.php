@@ -23,34 +23,11 @@ class ArtistController extends Controller
         $user = \App\User::where("id","=", $currentuser->id)->with("albums", 'albums.artist')->first();
         $title = "Artists";
 
-        $artists = $currentuser->artists();
+        $albums = $user->albums;
 
 
 
-        return view("layout.master", ["type" => "artist"])->nest('content', 'layout.grid', ["data" => $artists, "title" => $title, "type" => "artist"]);
-    }
-
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return view("layout.master", ["type" => "artist"])->nest('content', 'layout.grid', ["data" => $albums, "title" => $title, "type" => "artist"]);
     }
 
     /**
