@@ -13,6 +13,11 @@ class AlbumController extends Controller
      * Responds to requests to POST /album/add
      */
     public function postAddAlbum(Request $request) {
+        $this->validate($request,[
+            'title' => 'required|min:3',
+            'artist' => 'required|min:4',
+        ]);
+        
         $title_input = $request->title;
         $artist_input = $request->artist;
         $cover_url = "";

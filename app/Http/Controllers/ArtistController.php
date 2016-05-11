@@ -23,11 +23,13 @@ class ArtistController extends Controller
         $user = \App\User::where("id","=", $currentuser->id)->with("albums", 'albums.artist')->first();
         $title = "Artists";
 
-        $albums = $user->albums;
+        $artists = $user->albums;
+
+        return $user->artists();
 
 
 
-        return view("layout.master", ["type" => "artist"])->nest('content', 'layout.grid', ["data" => $albums, "title" => $title, "type" => "artist"]);
+        return view("layout.master", ["type" => "artist"])->nest('content', 'layout.grid', ["data" => $artists, "title" => $title, "type" => "artist"]);
     }
 
     /**
