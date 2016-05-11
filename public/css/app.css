@@ -35,7 +35,7 @@ h1, h2, h3, h4 {
 }
 /* line 33, ../../resources/assets/sass/app.scss */
 .item-list .item.item-album {
-  height: auto;
+  height: 530px;
 }
 /* line 36, ../../resources/assets/sass/app.scss */
 .item-list .item.item-album h2, .item-list .item.item-album h3 {
