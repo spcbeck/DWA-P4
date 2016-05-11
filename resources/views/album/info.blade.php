@@ -40,7 +40,7 @@
 		@endif
 		@if($type == "album")
 			<a href="/albums/confirm-delete/{{$data->id}}" class="btn btn-danger">Delete</a>
-			<a href="/albums/edit/{{$data->id}}" class="btn btn-danger">Edit</a>
+			<a href="/albums/edit/{{$data->id}}" class="btn btn-default">Edit</a>
 		@endif
 	</div>	
 	<div class="row">
