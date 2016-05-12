@@ -17,7 +17,7 @@ class AlbumController extends Controller
             'title' => 'required|min:3',
             'artist' => 'required|min:4',
         ]);
-        
+
         $title_input = $request->title;
         $artist_input = $request->artist;
         $cover_url = "";
@@ -67,13 +67,13 @@ class AlbumController extends Controller
             } else {
                 $album->artist_id = $artist->id;
             }
+        }
 
-            //get the current user and save the album to the current user's album list
+        //get the current user and save the album to the current user's album list
             $id = \Auth::user()->id;
             $currentuser = \App\User::find($id);
 
             $currentuser->albums()->save($album);
-        }
 
         return redirect("/albums/$album->id");
     }
@@ -181,8 +181,6 @@ class AlbumController extends Controller
             \Session::flash('message','Album not found.');
             return redirect('\albums');
         }
-
-        return  \DB::table("album_user")->where("user_id", "=", $user_id)->where("album_id", "=", $id)->get();
 
 
         \DB::table("album_user")->where("user_id", "=", $user_id)->where("album_id", "=", $id)->delete();
