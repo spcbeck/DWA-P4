@@ -15,7 +15,7 @@ class AlbumController extends Controller
     public function postAddAlbum(Request $request) {
         $this->validate($request,[
             'title' => 'required|min:3',
-            'artist' => 'required|min:4',
+            'artist' => 'required|min:3',
         ]);
 
         $title_input = $request->title;
@@ -32,6 +32,12 @@ class AlbumController extends Controller
             $api = new SpotifyWebAPI();
             $results_raw = $api->search($artist_input, 'artist');
             $results = json_decode(json_encode($results_raw), true);
+
+            if(empty($results["artists"]["items"])){
+                \Session::flash('flash_message','The Album or Artist you added was not found in our database.');
+                return redirect("/album/add");
+            }
+
             $picture = $results["artists"]["items"][0]["images"][0]["url"];
 
             $new_artist->name = $artist_input;
@@ -45,6 +51,14 @@ class AlbumController extends Controller
             $api = new SpotifyWebAPI();
             $results = $api->search($title_input, 'album');
             $results = json_decode(json_encode($results), true);
+
+
+             if(empty($results["albums"]["items"])){
+                \Session::flash('flash_message','The Album or Artist you added was not found in our database.');
+                return redirect("/album/add");
+            }
+
+
             $cover_url = $results["albums"]["items"][0]["images"][1]["url"];
             $spotify_id = $results["albums"]["items"][0]["id"];
 
@@ -146,11 +160,12 @@ class AlbumController extends Controller
         return view("layout.master", ["type" => "album"])->nest("content", 'album.edit', ["type" => "album", "album" => $album]);
     }
 
+    // Function for editting albums
     public function postEditAlbum(Request $request) {
 
         $this->validate($request,[
             'title' => 'required|min:3',
-            'artist' => 'required|min:4',
+            'artist' => 'required|min:3',
         ]);
 
         $album = \App\Album::find($request->id);
@@ -161,16 +176,18 @@ class AlbumController extends Controller
 
         $album->save();
 
-        \Session::flash('message','Your changes were saved.');
+        \Session::flash('message_success','Your changes were saved.');
         return redirect('/albums/'.$request->id);
     }
 
+     // function for confirm deletion of album page
     public function getConfirmDelete($id) {
         $album = \App\Album::find($id);
 
         return view('album.delete', ["type" => $album])->with('album', $album);
     }
 
+    // function for actually removing the link between user and album so it no longer appears in user's collection
     public function getDoDelete($id) {
         $user_id = \Auth::user()->id;
         $currentuser = \App\User::find($user_id);
@@ -178,7 +195,7 @@ class AlbumController extends Controller
         $album = \DB::table("albums")->find($id);
 
         if(is_null($album)) {
-            \Session::flash('message','Album not found.');
+            \Session::flash('flash_message','Album not found.');
             return redirect('\albums');
         }
 
@@ -186,7 +203,7 @@ class AlbumController extends Controller
         \DB::table("album_user")->where("user_id", "=", $user_id)->where("album_id", "=", $id)->delete();
 
         # Done
-        \Session::flash('message', $album->title.' was removed from your collection.');
+        \Session::flash('message_success', $album->title.' was removed from your collection.');
         return redirect('/albums');
     }
 }

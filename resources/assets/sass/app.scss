@@ -31,7 +31,7 @@ h1, h2, h3, h4 {
     position: relative;
 
     &.item-album {
-        height: 530px;
+        height: auto;
 
       h2, h3 {
         font-weight: 400;
@@ -40,8 +40,8 @@ h1, h2, h3, h4 {
   }
 
   img {
-    width: calc(100% + 40px);
-    margin-left: -20px;
+    max-width: calc(100% + 40px);
+    height: 300px;
   }
 
   .artist {

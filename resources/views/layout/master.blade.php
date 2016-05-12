@@ -54,6 +54,12 @@
 				</nav>
 			</div>
 			<div class="col-md-10">
+				@if(Session::get('flash_message') != null)
+				    <div class='flash_message alert alert-danger'>{{ Session::get('flash_message') }}</div>
+				@endif
+				@if(Session::get('message_success') != null)
+				    <div class='flash_message alert alert-success'>{{ Session::get('message_success') }}</div>
+				@endif
 				@yield('content')
 			</div>
 		</div>
