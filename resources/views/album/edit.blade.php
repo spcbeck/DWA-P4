@@ -5,6 +5,15 @@
 
 <div class="row">
 <form method="POST" action="/album/edit" class="add-form col-md-4" >
+	@if (count($errors) > 0)
+	    <div class="alert alert-danger">
+	        <ul>
+	            @foreach ($errors->all() as $error)
+	                <li>{{ $error }}</li>
+	            @endforeach
+	        </ul>
+	    </div>
+	@endif
 	{{ csrf_field() }}
 	<input type="hidden" name="id" value="{{$album->id}}"/>
 	<div class="form-group">
