@@ -9,7 +9,7 @@
 		<div class="col-md-4">
 			<div class="item item-{{ $type }}">
 					@if ($type == "artist")
-						<a href="/{{$type}}s/{{$item->id}}" style="background: url({{$item->artist->picture or "https://placehold.it/150x150"}})" class="{{$type}} artist-image">
+						<a href="/{{$type}}s/{{$item->artist_id}}" style="background: url({{$item->artist->picture or "https://placehold.it/150x150"}})" class="{{$type}} artist-image">
 							<div class="text-bg">
 					   			<h2>{{$item->artist->name}}</h2>
 					   		</div>
