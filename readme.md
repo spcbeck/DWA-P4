@@ -8,5 +8,5 @@ https://youtu.be/H9AKK3dGQK8
 ## Libraries
 * jQuery
 * Bootstrap
-# Spotify Web API for PHP
-# Fira Sans font from Typekit
+* Spotify Web API for PHP
+* Fira Sans font from Typekit
